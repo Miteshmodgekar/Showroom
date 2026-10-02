@@ -1,0 +1,214 @@
+/* ============================================================
+   ABOUT PAGE — Premium Motion Cards
+   ============================================================ */
+
+.about-intro-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.about-para {
+  font-size: 1.06rem;
+  color: #443f3b;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.business-specs-box {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.about-spec-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: transform var(--transition);
+}
+
+.about-spec-item:hover {
+  transform: translateX(4px);
+}
+
+.about-spec-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #78716c;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.about-spec-val {
+  font-size: 0.98rem;
+  color: #1c1917;
+  font-weight: 600;
+  line-height: 1.4;
+  text-shadow: none;
+}
+
+/* Showroom info card */
+.about-intro-card {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(196,163,90,0.15), transparent 50%),
+    linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-dark-2) 100%);
+  border-radius: var(--radius-xl);
+  padding: 44px;
+  color: var(--color-text-on-dark);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  border: 1px solid var(--color-border-dark);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.about-intro-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.4);
+}
+
+.about-intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+.showroom-card-inner h3 {
+  color: #ffffff;
+  font-size: 1.55rem;
+  margin-bottom: 14px;
+}
+
+.showroom-card-inner p {
+  color: #c8c0b6;
+  line-height: 1.65;
+  margin-bottom: 26px;
+}
+
+.card-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(139,105,20,0.3);
+}
+
+.card-contact-points {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-contact-points div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.93rem;
+  color: #d5cdc6;
+  transition: color var(--transition);
+}
+
+.card-contact-points div:hover { color: var(--color-accent); }
+
+/* Reason cards */
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.reason-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 34px 28px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.reason-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+
+.reason-card:hover::before { transform: scaleX(1); }
+
+.reason-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(28,26,23,0.12);
+  border-color: var(--color-accent);
+}
+
+.reason-icon-box {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary-bg), rgba(196,163,90,0.15));
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(139,105,20,0.12);
+  transition: transform var(--transition-spring);
+}
+
+.reason-card:hover .reason-icon-box {
+  transform: scale(1.12) rotate(-5deg);
+}
+
+.reason-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  transition: color var(--transition);
+}
+
+.reason-card:hover .reason-title {
+  color: var(--color-primary-dark);
+}
+
+.reason-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .about-intro-grid { grid-template-columns: 1fr; gap: 36px; }
+  .business-specs-box { grid-template-columns: 1fr; }
+}

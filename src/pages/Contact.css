@@ -1,0 +1,161 @@
+/* ============================================================
+   CONTACT PAGE — Premium Layout & Motion Details
+   ============================================================ */
+
+.contact-layout-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+.contact-subtext {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin: 14px 0 28px;
+}
+
+.contact-primary-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.contact-details-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-detail-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: border-color var(--transition),
+              box-shadow var(--transition),
+              transform var(--transition);
+}
+
+.contact-detail-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.detail-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary-bg), rgba(196,163,90,0.12));
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-spring);
+  box-shadow: 0 3px 10px rgba(139,105,20,0.1);
+}
+
+.contact-detail-card:hover .detail-icon {
+  transform: scale(1.12) rotate(-5deg);
+}
+
+.detail-title {
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.detail-value {
+  font-size: 1rem;
+  color: var(--color-text);
+  font-weight: 600;
+  display: block;
+  transition: color var(--transition);
+}
+
+.contact-detail-card:hover .detail-value {
+  color: var(--color-primary-dark);
+}
+
+.detail-sub {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+}
+
+/* Map Panel */
+.map-wrapper {
+  min-height: 500px;
+  height: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 12px 40px rgba(28,26,23,0.1);
+  background: #ffffff;
+  position: sticky;
+  top: calc(var(--nav-height) + 20px);
+  transition: box-shadow var(--transition);
+}
+
+.map-wrapper:hover {
+  box-shadow: 0 20px 56px rgba(28,26,23,0.15);
+}
+
+.map-placeholder-box {
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-bg-alt) 0%, #ebe4d8 100%);
+}
+
+.map-placeholder-icon {
+  color: var(--color-primary);
+  margin-bottom: 18px;
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.map-placeholder-box h3 {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+
+.map-placeholder-addr {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.map-placeholder-note {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .map-wrapper {
+    min-height: 360px;
+    position: static;
+  }
+}
