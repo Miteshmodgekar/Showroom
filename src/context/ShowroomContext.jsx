@@ -29,19 +29,16 @@ export function ShowroomProvider({ children }) {
   });
 
   // Load business info from localStorage or fallback to default
+  // NOTE: phone, whatsapp, and social from business.js ALWAYS win — editing business.js takes immediate effect.
   const [businessInfo, setBusinessInfo] = useState(() => {
     try {
       const saved = localStorage.getItem('cozycorner_business_v3');
       if (saved) {
         const parsed = JSON.parse(saved);
         const merged = { ...defaultBusiness, ...parsed };
-        // Values from business.js always take precedence so editing business.js works immediately
-        if (defaultBusiness.whatsapp && defaultBusiness.whatsapp !== "919999999999") {
-          merged.whatsapp = defaultBusiness.whatsapp;
-        }
-        if (defaultBusiness.phone && defaultBusiness.phone !== "YOUR PHONE NUMBER") {
-          merged.phone = defaultBusiness.phone;
-        }
+        // Always force critical contact fields from business.js so they can never be stale
+        merged.whatsapp = defaultBusiness.whatsapp;
+        merged.phone = defaultBusiness.phone;
         if (defaultBusiness.social?.instagram) {
           merged.social = { ...(merged.social || {}), instagram: defaultBusiness.social.instagram };
         }

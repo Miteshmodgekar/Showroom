@@ -8,8 +8,8 @@ export const business = {
   name: "CozyCorner Interiors",
   logo: "/images/logo/cozycorner-logo.png",
   tagline: "Bespoke Sofas, Designer Curtains, Orthopedic Mattresses & Full Home Interiors",
-  phone: "+91 7090334427",
-  whatsapp: "917090334427", // Include country code without + (e.g., 919876543210 for India)
+  phone: "+91 8951207571",
+  whatsapp: "918951207571", // Include country code without + (e.g., 919876543210 for India)
   email: "youremail@example.com",
   address: "YOUR FULL ADDRESS",
   city: "Belagavi",
@@ -56,13 +56,9 @@ export function getLatestBusinessInfo() {
         const parsed = JSON.parse(savedV3);
         const merged = { ...business, ...parsed };
 
-        // business.js values ALWAYS win for critical fields if they are real (non-placeholder)
-        if (business.whatsapp && business.whatsapp !== '919999999999') {
-          merged.whatsapp = business.whatsapp;
-        }
-        if (business.phone && business.phone !== 'YOUR PHONE NUMBER') {
-          merged.phone = business.phone;
-        }
+        // business.js values ALWAYS win for critical contact fields
+        merged.whatsapp = business.whatsapp;
+        merged.phone = business.phone;
         if (business.social?.instagram) {
           merged.social = { ...(merged.social || {}), instagram: business.social.instagram };
         }
@@ -74,13 +70,9 @@ export function getLatestBusinessInfo() {
         const parsedOld = JSON.parse(savedOld);
         const mergedOld = { ...business, ...parsedOld };
 
-        // business.js values ALWAYS win for critical fields if they are real (non-placeholder)
-        if (business.whatsapp && business.whatsapp !== '919999999999') {
-          mergedOld.whatsapp = business.whatsapp;
-        }
-        if (business.phone && business.phone !== 'YOUR PHONE NUMBER') {
-          mergedOld.phone = business.phone;
-        }
+        // business.js values ALWAYS win for critical contact fields
+        mergedOld.whatsapp = business.whatsapp;
+        mergedOld.phone = business.phone;
         if (business.social?.instagram) {
           mergedOld.social = { ...(mergedOld.social || {}), instagram: business.social.instagram };
         }
