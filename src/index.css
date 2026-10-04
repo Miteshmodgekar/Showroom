@@ -135,15 +135,22 @@ h1, h2, h3, h4, h5 {
   font-size: clamp(1rem, 1.5vw, 1.15rem);
   color: var(--color-text-muted);
   max-width: 600px;
+  line-height: 1.6;
 }
 
 .text-center { text-align: center; }
-.text-center .section-subtitle { margin-left: auto; margin-right: auto; }
+.text-center .section-subtitle,
+.page-hero .section-subtitle { 
+  margin-left: auto; 
+  margin-right: auto; 
+  text-align: center;
+}
 
 /* ── Buttons ── */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 14px 28px;
   border-radius: var(--radius-full);
@@ -157,6 +164,19 @@ h1, h2, h3, h4, h5 {
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+    overflow: visible;
+  }
+  /* Keep ::after ripple from spilling outside button boundary */
+  .btn::after {
+    border-radius: inherit;
+  }
 }
 
 .btn::after {
@@ -423,8 +443,15 @@ h1, h2, h3, h4, h5 {
 /* ── Grid ── */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 32px;
+}
+
+@media (max-width: 640px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 /* ══════════════════════════════════════════════════
@@ -571,9 +598,35 @@ h1, h2, h3, h4, h5 {
   pointer-events: none;
 }
 
-.page-hero .section-label { color: var(--color-accent); }
-.page-hero .section-title { color: var(--color-text-on-dark); }
-.page-hero .section-subtitle { color: rgba(244,240,234,0.7); }
+.page-hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero .section-label { 
+  color: var(--color-accent); 
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.page-hero .section-title { 
+  color: var(--color-text-on-dark); 
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.page-hero .section-subtitle { 
+  color: rgba(244,240,234,0.7); 
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 640px;
+}
 
 /* ── Filter bar ── */
 .filter-bar {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MessageCircle, ArrowRight, Star } from 'lucide-react';
-import { getProductWhatsAppLink, openWhatsApp } from '../config/business';
+import { getProductWhatsAppLink, getProductWhatsAppMessage, openWhatsApp } from '../config/business';
 import ProductImage from './ProductImage';
 
 export default function ProductCard({ product }) {
@@ -47,8 +47,8 @@ export default function ProductCard({ product }) {
             <ArrowRight size={14} />
           </Link>
           <a
-            href={getProductWhatsAppLink(name)}
-            onClick={(e) => openWhatsApp(`Hi, I am interested in the *${name}* shown on your website. Please share the price and availability.`, null, e)}
+            href={getProductWhatsAppLink(name, price)}
+            onClick={(e) => openWhatsApp(getProductWhatsAppMessage(name, price), null, e)}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn--wa btn--sm"

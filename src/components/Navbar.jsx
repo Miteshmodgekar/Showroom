@@ -39,8 +39,6 @@ export default function Navbar() {
             <span>Bespoke Sofas, Wave-Fold Curtains, Orthopedic Mattresses & Full Home Interiors</span>
           </div>
           <div className="top-bar-right desktop-only">
-            <span>📍 Experience Centre Open Mon–Sun 10 AM – 9 PM</span>
-            <span className="top-bar-divider">•</span>
             <a href={`tel:${business.phone}`} className="top-bar-phone">
               <Phone size={12} />
               <span>{business.phone}</span>
@@ -85,7 +83,7 @@ export default function Navbar() {
         </nav>
 
         {/* Right CTA */}
-        <div className="navbar-cta desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="navbar-cta desktop-only">
           {business.social?.instagram && (
             <a
               href={business.social.instagram}
@@ -120,14 +118,27 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Hamburger Toggle */}
-        <button
-          className="mobile-toggle"
-          aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
+        {/* Mobile Header Actions */}
+        <div className="mobile-header-actions">
+          <a
+            href={getWhatsAppLink("", business.whatsapp)}
+            onClick={(e) => openWhatsApp("", business.whatsapp, e)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-quick-wa"
+            aria-label="Chat on WhatsApp"
+            title="Chat on WhatsApp"
+          >
+            <MessageCircle size={20} />
+          </a>
+          <button
+            className="mobile-toggle"
+            aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}
@@ -169,10 +180,9 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--outline btn--lg w-full"
-                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
                 <InstagramIcon size={18} />
-                <span>Follow on Instagram (@cozy_corner26326)</span>
+                <span>Follow on Instagram</span>
               </a>
             )}
 

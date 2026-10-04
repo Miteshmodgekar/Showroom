@@ -8,8 +8,8 @@ export const business = {
   name: "CozyCorner Interiors",
   logo: "/images/logo/cozycorner-logo.png",
   tagline: "Bespoke Sofas, Designer Curtains, Orthopedic Mattresses & Full Home Interiors",
-  phone: "+91 74111 03558",
-  whatsapp: "917411103558", // Include country code without + (e.g., 919876543210 for India)
+  phone: "+91 7090334427",
+  whatsapp: "917090334427", // Include country code without + (e.g., 919876543210 for India)
   email: "youremail@example.com",
   address: "YOUR FULL ADDRESS",
   city: "Belagavi",
@@ -55,14 +55,16 @@ export function getLatestBusinessInfo() {
       if (savedV3) {
         const parsed = JSON.parse(savedV3);
         const merged = { ...business, ...parsed };
-        if (!parsed.whatsapp || parsed.whatsapp === "919999999999") {
+
+        // business.js values ALWAYS win for critical fields if they are real (non-placeholder)
+        if (business.whatsapp && business.whatsapp !== '919999999999') {
           merged.whatsapp = business.whatsapp;
         }
-        if (!parsed.social?.instagram && business.social?.instagram) {
-          merged.social = { ...(merged.social || {}), instagram: business.social.instagram };
-        }
-        if ((!parsed.phone || parsed.phone === "YOUR PHONE NUMBER") && business.phone) {
+        if (business.phone && business.phone !== 'YOUR PHONE NUMBER') {
           merged.phone = business.phone;
+        }
+        if (business.social?.instagram) {
+          merged.social = { ...(merged.social || {}), instagram: business.social.instagram };
         }
         return merged;
       }
@@ -71,10 +73,15 @@ export function getLatestBusinessInfo() {
       if (savedOld) {
         const parsedOld = JSON.parse(savedOld);
         const mergedOld = { ...business, ...parsedOld };
-        if (!parsedOld.whatsapp || parsedOld.whatsapp === "919999999999") {
+
+        // business.js values ALWAYS win for critical fields if they are real (non-placeholder)
+        if (business.whatsapp && business.whatsapp !== '919999999999') {
           mergedOld.whatsapp = business.whatsapp;
         }
-        if (!parsedOld.social?.instagram && business.social?.instagram) {
+        if (business.phone && business.phone !== 'YOUR PHONE NUMBER') {
+          mergedOld.phone = business.phone;
+        }
+        if (business.social?.instagram) {
           mergedOld.social = { ...(mergedOld.social || {}), instagram: business.social.instagram };
         }
         return mergedOld;
@@ -115,7 +122,11 @@ export function openWhatsApp(message = "", customNumber = null, e = null) {
   return false;
 }
 
-export function getProductWhatsAppLink(productName) {
-  const msg = `Hi, I am interested in the *${productName}* shown on your website. Please share the price and availability.`;
-  return getWhatsAppLink(msg);
+export function getProductWhatsAppMessage(productName, price = null) {
+  const priceSnippet = price ? ` (Listed at ${String(price).startsWith('₹') ? price : `₹${price}`})` : '';
+  return `Hi, I am interested in the *${productName}*${priceSnippet} shown on your website. Could you please share the availability, fabric options, and delivery timeline?`;
+}
+
+export function getProductWhatsAppLink(productName, price = null) {
+  return getWhatsAppLink(getProductWhatsAppMessage(productName, price));
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Phone, MessageCircle, Mail, MapPin, Clock, Navigation } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, MessageCircle, Mail, MapPin, Send, Sparkles } from 'lucide-react';
 import { business as defaultBusiness, getWhatsAppLink, openWhatsApp } from '../config/business';
 import { useShowroom } from '../context/ShowroomContext';
 import { InstagramIcon } from '../components/SocialIcons';
@@ -8,9 +8,19 @@ import './Contact.css';
 export default function Contact() {
   const { businessInfo } = useShowroom();
   const business = businessInfo || defaultBusiness;
-  const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${business.name} ${business.address} ${business.city}`
-  )}`;
+
+  const [formName, setFormName] = useState('');
+  const [formCategory, setFormCategory] = useState('Bespoke Sofas');
+  const [formMsg, setFormMsg] = useState('');
+
+  const handleSendInquiry = (e) => {
+    e.preventDefault();
+    const text = `Hello ${business.name}, my name is ${formName || 'a customer'}. I would like to enquire about ${formCategory}.${formMsg ? ` Note: ${formMsg}` : ''}`;
+    openWhatsApp(text, business.whatsapp, e);
+  };
+
+  const hasRealEmail = business.email && !business.email.includes('example.com');
+  const hasRealAddress = business.address && business.address !== 'YOUR FULL ADDRESS';
 
   return (
     <div className="contact-page">
@@ -18,9 +28,9 @@ export default function Contact() {
       <div className="page-hero">
         <div className="container">
           <span className="section-label">Connect With Us</span>
-          <h1 className="section-title">Contact & Showroom Visit</h1>
+          <h1 className="section-title">Get In Touch</h1>
           <p className="section-subtitle">
-            Have questions about custom sofas, foam densities, or want to schedule a showroom visit? Reach us directly below.
+            Have questions about custom sofas, foam densities, curtains, or want a personalized quotation? Reach out directly below.
           </p>
         </div>
       </div>
@@ -30,10 +40,10 @@ export default function Contact() {
           <div className="contact-layout-grid">
             {/* ── LEFT: CONTACT DETAILS & BUTTONS ── */}
             <div className="contact-info-panel">
-              <span className="section-label">Showroom Information</span>
+              <span className="section-label">Studio Direct Line</span>
               <h2>{business.name}</h2>
               <p className="contact-subtext">
-                Speak directly with our team for enquiries, pricing estimates, fabric swatches, or wholesale foam requirements.
+                Speak directly with our team for pricing estimates, fabric swatches, custom dimensions, or wholesale foam requirements.
               </p>
 
               {/* Action Buttons Row */}
@@ -47,44 +57,25 @@ export default function Contact() {
                 </a>
 
                 <a
-                  href={getWhatsAppLink("Hello! I would like to contact your showroom directly.", business.whatsapp)}
-                  onClick={(e) => openWhatsApp("Hello! I would like to contact your showroom directly.", business.whatsapp, e)}
+                  href={getWhatsAppLink("Hello! I would like to enquire about your sofas and furnishings.", business.whatsapp)}
+                  onClick={(e) => openWhatsApp("Hello! I would like to enquire about your sofas and furnishings.", business.whatsapp, e)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn--wa btn--md"
                 >
                   <MessageCircle size={18} />
-                  <span>WhatsApp</span>
-                </a>
-
-                <a
-                  href={directionsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn--outline btn--md"
-                >
-                  <Navigation size={18} />
-                  <span>Get Directions</span>
+                  <span>WhatsApp Us</span>
                 </a>
               </div>
 
               {/* Contact Details List */}
               <div className="contact-details-cards">
                 <div className="contact-detail-card">
-                  <div className="detail-icon"><MapPin size={22} /></div>
-                  <div>
-                    <span className="detail-title">Showroom Address</span>
-                    <p className="detail-value">{business.address}</p>
-                    <p className="detail-sub">{business.city}, {business.state} - {business.pincode}</p>
-                  </div>
-                </div>
-
-                <div className="contact-detail-card">
                   <div className="detail-icon"><Phone size={22} /></div>
                   <div>
                     <span className="detail-title">Telephone / Mobile</span>
                     <a href={`tel:${business.phone}`} className="detail-value">{business.phone}</a>
-                    <p className="detail-sub">Mon-Sat during business hours</p>
+                    <p className="detail-sub">Direct call for fast assistance</p>
                   </div>
                 </div>
 
@@ -92,8 +83,16 @@ export default function Contact() {
                   <div className="detail-icon"><MessageCircle size={22} /></div>
                   <div>
                     <span className="detail-title">WhatsApp Support</span>
-                    <p className="detail-value">+{business.whatsapp}</p>
-                    <p className="detail-sub">Instant response for pricing & catalogues</p>
+                    <a
+                      href={getWhatsAppLink("Hi! I would like details on your products and catalogues.", business.whatsapp)}
+                      onClick={(e) => openWhatsApp("Hi! I would like details on your products and catalogues.", business.whatsapp, e)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="detail-value"
+                    >
+                      +{business.whatsapp}
+                    </a>
+                    <p className="detail-sub">Instant response for pricing, photos & catalogues</p>
                   </div>
                 </div>
 
@@ -113,58 +112,96 @@ export default function Contact() {
                   </div>
                 )}
 
-                <div className="contact-detail-card">
-                  <div className="detail-icon"><Mail size={22} /></div>
-                  <div>
-                    <span className="detail-title">Email Address</span>
-                    <a href={`mailto:${business.email}`} className="detail-value">{business.email}</a>
+                {hasRealEmail && (
+                  <div className="contact-detail-card">
+                    <div className="detail-icon"><Mail size={22} /></div>
+                    <div>
+                      <span className="detail-title">Email Address</span>
+                      <a href={`mailto:${business.email}`} className="detail-value">{business.email}</a>
+                    </div>
                   </div>
-                </div>
+                )}
 
-                <div className="contact-detail-card">
-                  <div className="detail-icon"><Clock size={22} /></div>
-                  <div>
-                    <span className="detail-title">Showroom Hours</span>
-                    <p className="detail-value">{business.businessHours.weekdays}</p>
-                    <p className="detail-sub">{business.businessHours.sunday}</p>
+                {hasRealAddress ? (
+                  <div className="contact-detail-card">
+                    <div className="detail-icon"><MapPin size={22} /></div>
+                    <div>
+                      <span className="detail-title">Location</span>
+                      <p className="detail-value">{business.address}</p>
+                      <p className="detail-sub">{business.city}, {business.state}</p>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="contact-detail-card">
+                    <div className="detail-icon"><MapPin size={22} /></div>
+                    <div>
+                      <span className="detail-title">Service Region</span>
+                      <p className="detail-value">{business.city}, {business.state}</p>
+                      <p className="detail-sub">Doorstep consultations & home delivery</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* ── RIGHT: MAP LOCATION PLACEHOLDER ── */}
-            <div className="contact-map-panel">
-              <div className="map-wrapper">
-                {business.mapEmbedUrl ? (
-                  <iframe
-                    title="Showroom Location Map"
-                    src={business.mapEmbedUrl}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                  ></iframe>
-                ) : (
-                  <div className="map-placeholder-box">
-                    <MapPin size={48} className="map-placeholder-icon" />
-                    <h3>Showroom Location Map</h3>
-                    <p className="map-placeholder-addr">{business.address}, {business.city}</p>
-                    <span className="map-placeholder-note">
-                      (To display a live map, paste your Google Maps Embed URL into <code>src/config/business.js</code>)
-                    </span>
-                    <a
-                      href={directionsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn--outline btn--sm"
-                      style={{ marginTop: '16px' }}
-                    >
-                      <Navigation size={16} />
-                      <span>Open in Google Maps</span>
-                    </a>
+            {/* ── RIGHT: INSTANT WHATSAPP ENQUIRY CARD ── */}
+            <div className="contact-inquiry-panel">
+              <div className="inquiry-card">
+                <div className="inquiry-card-header">
+                  <span className="card-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                    <Sparkles size={13} /> Quick Consultation
+                  </span>
+                  <h3>Send Direct Enquiry</h3>
+                  <p>Choose what you are looking for and get prompt pricing and photos directly on WhatsApp.</p>
+                </div>
+
+                <form onSubmit={handleSendInquiry} className="inquiry-form">
+                  <div className="form-group">
+                    <label htmlFor="inquiry-name">Your Name</label>
+                    <input
+                      id="inquiry-name"
+                      type="text"
+                      className="form-input"
+                      placeholder="e.g. Rahul Sharma"
+                      value={formName}
+                      onChange={(e) => setFormName(e.target.value)}
+                    />
                   </div>
-                )}
+
+                  <div className="form-group">
+                    <label htmlFor="inquiry-cat">Product / Requirement</label>
+                    <select
+                      id="inquiry-cat"
+                      className="form-select"
+                      value={formCategory}
+                      onChange={(e) => setFormCategory(e.target.value)}
+                    >
+                      <option value="Bespoke Sofas & Couches">Bespoke Living Sofas & Sectionals</option>
+                      <option value="Sofa Cum Beds">Multi-functional Sofa Cum Beds</option>
+                      <option value="High-Density Mattress Foam">High-Density Mattress & Cushion Foam</option>
+                      <option value="Wave-Fold Motorized Curtains">Wave-Fold Designer Curtains</option>
+                      <option value="Full Home Turnkey Interior">Full Home Turnkey Interior</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="inquiry-msg">Specific Requirements (Optional)</label>
+                    <textarea
+                      id="inquiry-msg"
+                      rows="3"
+                      className="form-textarea"
+                      placeholder="e.g. Need 3+2 seater in velvet fabric, or 40D foam sheet sizes..."
+                      value={formMsg}
+                      onChange={(e) => setFormMsg(e.target.value)}
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" className="btn btn--wa btn--lg w-full" style={{ justifyContent: 'center' }}>
+                    <MessageCircle size={18} />
+                    <span>Send via WhatsApp</span>
+                  </button>
+                  <p className="inquiry-note">⚡ Direct connection to our team on WhatsApp with instant response.</p>
+                </form>
               </div>
             </div>
           </div>

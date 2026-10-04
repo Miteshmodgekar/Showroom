@@ -633,3 +633,54 @@
 .section-header .section-label {
   animation: none; /* controlled by reveal */
 }
+
+/* ═══════════════════ MOBILE RESPONSIVE OVERRIDES ═══════════════════ */
+@media (max-width: 1080px) {
+  /* Hero CTA group: stack buttons, full-width */
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Custom CTA box buttons: full-width on mobile */
+  .custom-cta-box [style*="display: flex"] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .custom-cta-box .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Categories grid: single column */
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Features grid: two columns on mobile */
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* Hero trust bar: wrap */
+  .hero-trust-bar {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Features bar: single column on very small */
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}

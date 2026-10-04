@@ -84,20 +84,22 @@ export default function Footer() {
           <ul className="footer-contact-list">
             <li>
               <MapPin size={18} className="footer-icon" />
-              <span>{business.address}, {business.city}, {business.state} {business.pincode}</span>
+              <span>
+                {business.address && business.address !== 'YOUR FULL ADDRESS'
+                  ? `${business.address}, ${business.city}`
+                  : `${business.city}, ${business.state}`}
+              </span>
             </li>
             <li>
               <Phone size={18} className="footer-icon" />
               <a href={`tel:${business.phone}`}>{business.phone}</a>
             </li>
-            <li>
-              <Mail size={18} className="footer-icon" />
-              <a href={`mailto:${business.email}`}>{business.email}</a>
-            </li>
-            <li>
-              <Clock size={18} className="footer-icon" />
-              <span>{business.businessHours.weekdays}</span>
-            </li>
+            {business.email && !business.email.includes('example.com') && (
+              <li>
+                <Mail size={18} className="footer-icon" />
+                <a href={`mailto:${business.email}`}>{business.email}</a>
+              </li>
+            )}
           </ul>
 
           <div style={{ marginTop: '16px' }}>

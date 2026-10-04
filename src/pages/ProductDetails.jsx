@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Shield, Sparkles, MessageCircle, Phone, Check } from 'lucide-react';
 import { getProductById as getFallbackProduct } from '../data/products';
 import { useShowroom } from '../context/ShowroomContext';
-import { business as defaultBusiness, getProductWhatsAppLink, openWhatsApp } from '../config/business';
+import { business as defaultBusiness, getProductWhatsAppLink, getProductWhatsAppMessage, openWhatsApp } from '../config/business';
 import ProductImage from '../components/ProductImage';
 import './ProductDetails.css';
 
@@ -137,14 +137,14 @@ export default function ProductDetails() {
             {/* ── ACTION BUTTONS ── */}
             <div className="detail-action-buttons">
               <a
-                href={getProductWhatsAppLink(name)}
-                onClick={(e) => openWhatsApp(`Hi, I am interested in the *${name}* shown on your website. Please share the price and availability.`, business.whatsapp, e)}
+                href={getProductWhatsAppLink(name, price)}
+                onClick={(e) => openWhatsApp(getProductWhatsAppMessage(name, price), business.whatsapp, e)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--wa btn--lg w-full-mobile"
               >
                 <MessageCircle size={22} />
-                <span>Get Price on WhatsApp</span>
+                <span>Order / Enquire on WhatsApp</span>
               </a>
 
               <a

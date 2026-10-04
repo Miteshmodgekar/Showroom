@@ -158,17 +158,7 @@ export default function Gallery() {
       {/* ── FEATURED VIDEO SHOWCASE SECTION ── */}
       <section className="section" style={{ paddingTop: '20px', paddingBottom: '30px' }}>
         <div className="container">
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(20, 26, 31, 0.95), rgba(35, 43, 50, 0.9))',
-            borderRadius: '24px',
-            border: '1px solid rgba(212, 175, 55, 0.3)',
-            padding: '32px',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '32px',
-            alignItems: 'center'
-          }}>
+          <div className="gallery-featured-card">
             <div style={{ borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', background: '#000' }}>
               <video
                 controls
@@ -186,7 +176,7 @@ export default function Gallery() {
                 <Video size={16} />
                 <span>Live Residential Walkthrough</span>
               </div>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', color: '#ffffff', marginBottom: '14px', lineHeight: 1.25 }}>
+              <h2 style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.2rem)', color: '#ffffff', marginBottom: '14px', lineHeight: 1.25 }}>
                 See Real Craftsmanship In Motion
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, marginBottom: '20px', fontSize: '0.95rem' }}>

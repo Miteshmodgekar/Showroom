@@ -35,14 +35,15 @@ export function ShowroomProvider({ children }) {
       if (saved) {
         const parsed = JSON.parse(saved);
         const merged = { ...defaultBusiness, ...parsed };
-        if (!parsed.whatsapp || parsed.whatsapp === "919999999999") {
+        // Values from business.js always take precedence so editing business.js works immediately
+        if (defaultBusiness.whatsapp && defaultBusiness.whatsapp !== "919999999999") {
           merged.whatsapp = defaultBusiness.whatsapp;
         }
-        if (!parsed.social?.instagram && defaultBusiness.social?.instagram) {
-          merged.social = { ...(merged.social || {}), instagram: defaultBusiness.social.instagram };
-        }
-        if ((!parsed.phone || parsed.phone === "YOUR PHONE NUMBER") && defaultBusiness.phone) {
+        if (defaultBusiness.phone && defaultBusiness.phone !== "YOUR PHONE NUMBER") {
           merged.phone = defaultBusiness.phone;
+        }
+        if (defaultBusiness.social?.instagram) {
+          merged.social = { ...(merged.social || {}), instagram: defaultBusiness.social.instagram };
         }
         return merged;
       }

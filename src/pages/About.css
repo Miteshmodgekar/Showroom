@@ -212,3 +212,16 @@
   .about-intro-grid { grid-template-columns: 1fr; gap: 36px; }
   .business-specs-box { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 640px) {
+  .reasons-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .reason-card {
+    padding: 24px 20px;
+  }
+  .about-badge-card {
+    padding: 24px 18px;
+  }
+}

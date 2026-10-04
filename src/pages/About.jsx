@@ -104,7 +104,7 @@ export default function About() {
                   <span>Enquire on WhatsApp</span>
                 </a>
                 <Link to="/contact" className="btn btn--outline btn--md">
-                  <span>Showroom Directions</span>
+                  <span>Contact Our Team</span>
                 </Link>
               </div>
             </div>
